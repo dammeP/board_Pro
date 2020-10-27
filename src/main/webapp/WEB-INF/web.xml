@@ -22,11 +22,6 @@
 	<url-pattern>/dbConnectionPool</url-pattern>
   </servlet-mapping>
   
-  <!-- /basicServlet으로 요청이 올경우 basicServlet이라는 이름의 서블릿을 실행 -->
-  <servlet-mapping>
-  	<servlet-name>TimeTablesServlet</servlet-name>
-  	<url-pattern>/TimeTablesServlet</url-pattern>
-  </servlet-mapping>
   
   <!-- listener 등록  -->
   <listener>

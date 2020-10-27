@@ -4,7 +4,63 @@
 <html lang="en">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/js.cookie-2.2.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 
+	$(function(){
+		if(Cookies.get("REMEMBERME")=="Y"){
+			$('input[type=checkbox]').prop('checked',true);
+			$('#inputEmail').attr('value',Cookies.get("USERNM"));
+		} else{
+			$('input[type=checkbox]').prop('checked',false);
+		}
+
+		// sign in 버튼이 클릭 되었을 때 이벤트 핸들러
+		$('button').on('click',function(){
+			console.log("button_click");
+			if($('input[type=checkbox]').prop('checked')==true){
+				Cookies.set("REMEMBERME","Y")
+				Cookies.set("USERNM", $('#inputEmail').val())
+			} else{
+				Cookies.remove("REMEMBERME");
+				Cookies.remove("USERNM");
+			}
+
+			// submit
+			$('form').submit();
+		})
+		
+	})
+
+	function getCookieValue(cookieName) {
+		// 자바스크립트 로직
+		result = "";
+		var cookies = document.cookie.split("; ");
+		for (i = 0; i < cookies.length; i++) {
+			cookies2 = cookies[i].split("=");
+			if (cookies2[0] == cookieName) {
+				result = cookies2[1];
+				return result;
+			}
+		}
+		return ""; // 원하는 쿠키가 없는경우
+	}
+	function setCookie(cookieName, cookieValue, expires) {
+
+		///document.cookie = "USERNM = brown; path=/; expires=Web; 07 Oct 2020 00:38:35 GMT;"
+		var today = new Date();
+
+		// 현재날짜에서 미래로 + expires 만큼 한 날짜 구하기
+		today.setDate(today.getDate() + expires);
+		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires="
+				+ today.toGMTString();
+		console.log(document.cookie);
+
+	}
+	// 해당쿠키의 expires속성을 과거날짜로 변경
+	function deleteCookie(cookieName) {
+		setCookie(cookieName, "", -1); // 현재날짜에서 -1
+	}
+</script>
 <html>
 <head>
   <meta charset="utf-8">
@@ -31,7 +87,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" name="userId" class="form-control" placeholder="Email address" required autofocus value="brown">
         <label for="inputPassword"  class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required value="brownPass">
+        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required value="brownPass">
         <div class="checkbox">
           <label>
             <input type="checkbox" name="remember" value="remember-me"> Remember me

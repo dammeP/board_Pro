@@ -1,6 +1,6 @@
 package kr.or.ddit.board.vo;
 
-public class CBoradVO {
+public class CBoardVO {
 	private String cboardUseCheck;
 	private String cboardCategory;
 	private String cboardNo;
@@ -56,7 +56,7 @@ public class CBoradVO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CBoradVO other = (CBoradVO) obj;
+		CBoardVO other = (CBoardVO) obj;
 		if (cboardCategory == null) {
 			if (other.cboardCategory != null)
 				return false;
