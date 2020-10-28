@@ -12,6 +12,7 @@ import kr.or.ddit.board.dao.BoardDao;
 import kr.or.ddit.board.dao.BoardDaoI;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.CBoardVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.PageVO;
 import kr.or.ddit.board.vo.UsersVO;
 import kr.or.ddit.db.MybatisUtil;
@@ -73,7 +74,36 @@ public class BoardService implements BoardServiceI{
 		return boardDao.getBoard(boardNo);
 	}
 
-//	}
+	@Override
+	public int insertBoard(BoardVO boardVO) {
+		return boardDao.insertBoard(boardVO);
+	}
+
+	@Override
+	public int insertFiles(FilesVO filesVO) {
+		return boardDao.insertFiles(filesVO);
+	}
+
+	@Override
+	public int deleteBoard(String boardNo) {
+		return boardDao.deleteBoard(boardNo);
+	}
+
+	@Override
+	public List<FilesVO> selectAllFiles(String boardNo) {
+		return boardDao.selectAllFiles(boardNo);
+	}
+
+	@Override
+	public int updateBoard(BoardVO boardVO) {
+		return boardDao.updateBoard(boardVO);
+	}
+
+	@Override
+	public int updateFiles(FilesVO filesVO) {
+		return boardDao.updateFiles(filesVO);
+	}
+
 	
 
 

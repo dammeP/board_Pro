@@ -40,14 +40,11 @@ public class CBoardInsertServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.setAttribute("userId", boardService.getUsers(userId));
-//		UsersVO usersVO = boardService.getUsers(userId);
 		
 		request.setCharacterEncoding("utf-8");
 		String userId = request.getParameter("userId");
 		String cboardCategory = request.getParameter("cboardCategory");
 		String cboardUseCheck = request.getParameter("cboardUseCheck");
-//		UsersVO usersVO = boardService.getUsers(userId);
 		List<CBoardVO> cBoardVO = boardService.selectAllCBoard();
 		
 		CBoardVO cboardVO = new CBoardVO();
@@ -56,7 +53,6 @@ public class CBoardInsertServlet extends HttpServlet {
 		cboardVO.setCboardUseCheck(cboardUseCheck);
 		
 		logger.debug("parameter : {},{},{}",userId,cboardCategory,cboardUseCheck);
-		logger.debug("parameter : {},{}",cboardCategory,cboardUseCheck);
 		
 		
 		int insertCnt= boardService.insertCBoard(cboardVO);

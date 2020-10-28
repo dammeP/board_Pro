@@ -1,6 +1,8 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.board.vo.BoardVO;
+import kr.or.ddit.board.vo.FilesVO;
 
 /**
  * Servlet implementation class BoardDetailServlet
@@ -34,8 +37,12 @@ public class BoardDetailServlet extends HttpServlet {
 		logger.debug("boNO:{}",boardNo);
 		
 		BoardVO boardVO = boardService.getBoard(boardNo);
-		
+		request.setAttribute("boardNo", boardNo);
 		request.setAttribute("boardVO", boardVO);
+		
+		List<FilesVO> filesList = boardService.selectAllFiles(boardNo);
+ 		
+		request.setAttribute("filesList", filesList); 
 		
 		request.getRequestDispatcher("/board/boardDetail.jsp").forward(request, response);
 	

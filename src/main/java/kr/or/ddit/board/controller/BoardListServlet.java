@@ -37,8 +37,8 @@ public class BoardListServlet extends HttpServlet {
 		
 		String cboardNo = request.getParameter("cboardNo");
 		request.setAttribute("cboardNo", cboardNo);
-		
 		logger.debug("cboardNo : {}",cboardNo);
+		
 		
 		// page
 		String page_str = request.getParameter("page");
@@ -61,6 +61,7 @@ public class BoardListServlet extends HttpServlet {
 		logger.debug("boardList:{}",map.get("boardList"));
 		logger.debug("pages:{}",map.get("pages"));
 		
+		request.getSession().setAttribute("S_cboardNo",cboardNo);
 		request.getRequestDispatcher("/board/boardList.jsp").forward(request, response);
 	}
 

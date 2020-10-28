@@ -14,7 +14,7 @@
     WHERE cboardUseCheck = '0'
   </select>
   
-  <insert id="insertCBoard" parameterType="CBoardVO">
+  <insert id="insertCBoard" parameterType="CBoardVO" >
   	INSERT INTO CBoard
   	(cboardUseCheck, cboardCategory, cboardNo, userId)
   	VALUES (#{cboardUseCheck}, #{cboardCategory},cboard_seq.nextVal,#{userId})

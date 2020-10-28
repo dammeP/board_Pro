@@ -14,17 +14,6 @@
 		   		   ORDER BY boardNo) a)
 	WHERE rn BETWEEN (#{page}-1) * #{pageSize} +1 AND #{page} * #{pageSize}	   		    	
   </select>
-<!--   <select id="selectPageBoard" parameterType="PageVO" resultType="BoardVO"> -->
-<!--     SELECT * -->
-<!--     FROM  -->
-<!-- 		(SELECT ROWNUM rn, a.* -->
-<!-- 		   FROM -->
-<!-- 		   		(SELECT * -->
-<!-- 		   		   FROM Board -->
-<!-- 		   		   WHERE cboardNo = #{cboardNo, jdbcType=NUMERIC} -->
-<!-- 		   		   ORDER BY boardNo) a) -->
-<!-- 	WHERE rn BETWEEN (#{page, jdbcType=NUMERIC} -1) * #{pageSize, jdbcType=INTEGER} +1 AND #{page, jdbcType=NUMERIC} * #{pageSize, jdbcType=NUMERIC}	   		    	 -->
-<!--   </select> -->
   
   <select id="selectTotalCntBoard" parameterType="String" resultType = "int">
    SELECT COUNT(*)
@@ -37,4 +26,23 @@
   	  FROM Board
   	 WHERE boardNo = #{boardNo} 
   </select>
+  
+  <insert id="insertBoard" parameterType="BoardVO">
+  	INSERT INTO Board
+  	(boardNo, boardTitle, boardContent, boardDate, CBoardNo, userId)
+  	<selectKey keyProperty="boardNo" resultType="String">
+  		select board_seq.currval from dual
+  	</selectKey>
+  	VALUES (board_seq.nextVal, #{boardTitle}, #{boardContent}, SYSDATE, #{CBoardNo}, #{userId})
+  </insert>
+  
+  <delete id="deleteBoard" parameterType="String">
+  	UPDATE Board SET boardUseCheck = '1' WHERE boardNo = #{boardNo} 
+  </delete>
+  
+  <update id="updateBoard" parameterType="BoardVO">
+  	UPDATE Board
+  	  SET boardTitle = #{boardTitle}, boardContent = #{boardContent} 
+  	  WHERE boardNo = board_seq.currval
+  </update>
 </mapper>

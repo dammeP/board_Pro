@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.CBoardVO;
+import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.board.vo.PageVO;
 import kr.or.ddit.board.vo.UsersVO;
 
@@ -27,4 +28,18 @@ public interface BoardServiceI {
 	int selectTotalCntBoard(String cboardNo); // Board의 총 게시물 수
 	
 	BoardVO getBoard(String boardNo);	// boardNo에 해당하는 게시물 조회
+	
+	int insertBoard(BoardVO boardVO);	// 게시글 생성
+	
+	int insertFiles(FilesVO filesVO);	// 첨부파일 추가
+
+	int deleteBoard(String boardNo);	// 게시글 삭제
+	
+	List<FilesVO> selectAllFiles(String boardNo);		// Files 전체 리스트 조회
+	
+	int updateBoard(BoardVO boardVO);	// 게시글 수정
+	
+	int updateFiles(FilesVO filesVO);	// 첨부파일 수정
+	
+	
 }

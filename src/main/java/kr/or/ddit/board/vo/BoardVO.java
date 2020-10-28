@@ -9,6 +9,7 @@ public class BoardVO {
 	private Date boardDate;
 	private String CBoardNo;
 	private String userId;
+	private String boardUseCheck;
 	
 	public String getBoardNo() {
 		return boardNo;
@@ -46,13 +47,12 @@ public class BoardVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	@Override
-	public String toString() {
-		return "BoardVO [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardDate=" + boardDate + ", CBoardNo=" + CBoardNo + ", userId=" + userId + "]";
+	public String getBoardUseCheck() {
+		return boardUseCheck;
 	}
-	
+	public void setBoardUseCheck(String boardUseCheck) {
+		this.boardUseCheck = boardUseCheck;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,10 +62,10 @@ public class BoardVO {
 		result = prime * result + ((boardDate == null) ? 0 : boardDate.hashCode());
 		result = prime * result + ((boardNo == null) ? 0 : boardNo.hashCode());
 		result = prime * result + ((boardTitle == null) ? 0 : boardTitle.hashCode());
+		result = prime * result + ((boardUseCheck == null) ? 0 : boardUseCheck.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,6 +100,11 @@ public class BoardVO {
 				return false;
 		} else if (!boardTitle.equals(other.boardTitle))
 			return false;
+		if (boardUseCheck == null) {
+			if (other.boardUseCheck != null)
+				return false;
+		} else if (!boardUseCheck.equals(other.boardUseCheck))
+			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
@@ -107,6 +112,14 @@ public class BoardVO {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", boardDate=" + boardDate + ", CBoardNo=" + CBoardNo + ", userId=" + userId + ", boardUseCheck="
+				+ boardUseCheck + "]";
+	}
+	
+	
 	
 	
 	

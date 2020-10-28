@@ -22,8 +22,8 @@ private static final Logger logger = LoggerFactory.getLogger(ConnectionPoolServl
 		BasicDataSource bd = new BasicDataSource();
 		bd.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		bd.setUrl("jdbc:oracle:thin:@localhost:1521/xe");
-		bd.setUsername("dam");
-		bd.setPassword("java");
+		bd.setUsername("boarduser");
+		bd.setPassword("boarduser");
 		bd.setInitialSize(20);
 		
 		ServletContext sc = getServletContext();

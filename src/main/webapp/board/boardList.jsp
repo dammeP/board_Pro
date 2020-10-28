@@ -67,16 +67,24 @@ td {
 									<tbody id="boardListID">
 										<c:forEach items="${boardList }" var="boardList">
 											<tr class="a" data-boardNo="${boardList.boardNo }">
-												<td>${boardList.boardNo }</td>
-												<td><a href="${pageContext.request.contextPath }/BoardDetail?boardNo=${boardList.boardNo}">${boardList.boardTitle }</a></td>
-												<td>${boardList.userId }</td>
-												<td><fmt:formatDate value="${boardList.boardDate }" pattern="yyyy-MM-dd" /></td>
+													<td>${boardList.boardNo }</td>
+												<c:choose>
+													
+													<c:when test="${boardList.boardUseCheck == '1'}">
+														<td>[삭제된 게시물 입니다]</td>
+													</c:when>
+													<c:otherwise>
+														<td><a href="${pageContext.request.contextPath }/BoardDetail?boardNo=${boardList.boardNo}">${boardList.boardTitle }</a></td>
+													</c:otherwise>
+												</c:choose>
+														<td>${boardList.userId }</td>
+														<td><fmt:formatDate value="${boardList.boardDate }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
 						</div>
-						<a href="${cp}/boardRegist" class="btn btn-default pull-right">새글 등록</a>
+						<a href="${cp}/BoardRegist?cboardNo=${cboardNo}" class="btn btn-default pull-right">새글 등록</a>
 
 						<div class="text-center">
 							<ul class="pagination">
@@ -92,9 +100,6 @@ td {
 											<li class="active"><span>${i }</span></li>
 										</c:when>
 										<c:otherwise>
-											<%
-												String cboardNo = request.getParameter("cboardNo");
-											%>
 											<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${i}">${i }</a></li>
 										</c:otherwise>
 									</c:choose>

@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 		// 등록된 회원이 없거나, 비밀번호가 틀렸을 떄
 		if(usersVO == null || !usersVO.getPass().equals(pass) ) {
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
+//			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 		// 일치할 때
 		else if(usersVO.getPass().equals(pass)){

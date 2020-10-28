@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -48,32 +49,57 @@ td {
 				<%@ include file="/cBoard/cboardList.jsp"%>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<br><br><br>
+				<br>
+				<br>
+				<br>
 				<div class="form-group">
 					<label id="userid" for="userid" class="col-sm-2 control-label">제목</label>
-						<div class="col-sm-10">
-							<label id="boardTitle" data-userid="${boardVO.boardTitle}" class="control=label">${boardVO.boardTitle}</label>
-						</div>
+					<div class="col-sm-10">
+						<label id="boardTitle" data-userid="${boardVO.boardTitle}"
+							class="control=label">${boardVO.boardTitle}</label>
+					</div>
 				</div>
-				<br><br><br>
+				<br>
+				<br>
+				<br>
 				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">글내용</label>
-						<div class="col-sm-10">
-							<label id="boardContent"  class="control=label">${boardVO.boardContent}</label>
-						</div>
+					<label id="userid" for="userid" class="col-sm-2 control-label">내용</label>
+					<div class="col-sm-10">
+						<label id="boardContent" class="control=label">${boardVO.boardContent}</label>
+					</div>
 				</div>
-				<br><br><br>
+				<br>
+				<br>
+				<br>
 				<div class="form-group">
 					<label id="userid" for="userid" class="col-sm-2 control-label">첨부파일</label>
-						<div class="col-sm-10">
-							<label id="file" class="control=label">첨부파일 공간</label>
-						</div>
+							<c:forEach items="${filesList }" var = "fileList">
+								<label id="file" class="control=label">${fileList.realFileNm }</label><br>
+							</c:forEach>	
 				</div>
+				<div>
+					<div class="col-sm-offset-2 col-sm-10">
+						<button name="upBtn">
+							<a href="${cp }/BoardUpdate?boardNo=${boardVO.boardNo}">수정</a>
+						</button>
+						<form action="${cp }/BoardDelete" method="POST">
+							<% String boardNo = request.getParameter("boardNo"); 
+							%>							
+							<input type="hidden" name="cboardNo" value="${boardVO.CBoardNo}" }>
+							<input type="hidden" name="boardNo" value="${boardNo}" }>
+							<input type="submit" value="삭제">
+						</form>
+						<button name="ureBtnpBtn">
+							<a href="">답글</a>
+						</button>
+					</div>
+				</div>
+
 				<br><br><br>
 				<div class="form-group">
 					<label id="userid" for="userid" class="col-sm-2 control-label">댓글</label>
 						<div class="col-sm-10">
-							<label id="reply"  class="control=label">댓글 공간</label>
+							<textarea name="boardTitle"></textarea>
 						</div>
 				</div>
 				<br><br><br>

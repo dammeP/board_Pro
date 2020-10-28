@@ -42,8 +42,7 @@ td {
 							<form id="frm" action="${cp }/CBoardInsert" method="POST">
 								<table class="table table-striped">
 									<tr>
-										<input type="hidden" id="userId" name="userId"
-											value=${S_USERS.userId }>
+										<input type="hidden" id="userId" name="userId"value=${S_USERS.userId }>
 										<td>게시판이름</td>
 										<td><input type="text" id="cboardCategory"
 											name="cboardCategory"></td>
