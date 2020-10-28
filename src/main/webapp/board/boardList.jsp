@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +12,34 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Jsp</title>
-
-<!-- <script src="/js/jquery/jquery-1.12.4.js"></script><link href="bootstrap.css" rel="stylesheet">Bootstrap core CSS -->
 <%@ include file="/layout/commonLib.jsp"%>
 
+<!-- <script src="/js/jquery/jquery-1.12.4.js"></script><link href="bootstrap.css" rel="stylesheet">Bootstrap core CSS -->
+
+<script>
+// 	$(function(){
+// 		$('.a').on('click',function(){
+// 			var boardNo = "2";
+// 			alert(boardNo);
+// 			boardNo = $(this).data('boardNo');
+// 			alert(boardNo);
+
+// 			$(location).attr('href',"boardDetail?boardNo="+boardNo);
+// // 			document.location="boardDetail?boardNo="+boardNo;
+// 		})
+// 	})
+
+
+
+</script>
 <style>
 td {
 	width: 100px;
 }
 </style>
+
 </head>
 
 <body>
@@ -37,9 +55,8 @@ td {
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">게시판 등록</h2>
+						<h2 class="sub-header">게시글 목록</h2>
 						<div class="table-responsive">
-							<form id="frm" action="${cp }/CBoardInsert" method="POST">
 								<table class="table table-striped">
 									<tr>
 										<th>게시글 번호</th>
@@ -47,17 +64,48 @@ td {
 										<th>작성자 아이디</th>
 										<th>작성 일시</th>
 									</tr>
-									<tbody id="boardList">
+									<tbody id="boardListID">
 										<c:forEach items="${boardList }" var="boardList">
-										<tr data-userid="${boardList.boardNo }">
-											<td>${boardList.boardNo }</td>
-											<td>${boardList.boardTitle }</td>
-											<td>${boardList.userId }</td>
-										</tr>
+											<tr class="a" data-boardNo="${boardList.boardNo }">
+												<td>${boardList.boardNo }</td>
+												<td><a href="${pageContext.request.contextPath }/BoardDetail?boardNo=${boardList.boardNo}">${boardList.boardTitle }</a></td>
+												<td>${boardList.userId }</td>
+												<td><fmt:formatDate value="${boardList.boardDate }" pattern="yyyy-MM-dd" /></td>
+											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-							</form>
+						</div>
+						<a href="${cp}/boardRegist" class="btn btn-default pull-right">새글 등록</a>
+
+						<div class="text-center">
+							<ul class="pagination">
+								<c:if test="${page != 1}">
+									<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${1}"> << </a></li>
+								</c:if>
+								<c:if test="${page != 1}">
+									<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${page - 1}"> < </a></li>
+								</c:if>
+								<c:forEach var="i" begin="1" end="${pages }">
+									<c:choose>
+										<c:when test=" ${i == page}">
+											<li class="active"><span>${i }</span></li>
+										</c:when>
+										<c:otherwise>
+											<%
+												String cboardNo = request.getParameter("cboardNo");
+											%>
+											<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${i}">${i }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:if test="${page != pages}">
+									<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${page + 1}"> > </a></li>
+								</c:if>
+								<c:if test="${page != pages}">
+									<li><a href="${pageContext.request.contextPath }/boardList?cboardNo=${cboardNo}&page=${pages}"> >> </a></li>
+								</c:if>
+							</ul>
 						</div>
 
 					</div>

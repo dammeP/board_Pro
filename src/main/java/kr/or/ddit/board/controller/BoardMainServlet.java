@@ -16,7 +16,7 @@ import kr.or.ddit.board.vo.UsersVO;
  * Servlet implementation class BoardMain
  */
 @WebServlet("/BoardMain")
-public class BoardMain extends HttpServlet {
+public class BoardMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	BoardServiceI boardService;

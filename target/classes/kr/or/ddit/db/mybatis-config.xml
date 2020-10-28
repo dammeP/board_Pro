@@ -7,6 +7,8 @@
 	<typeAliases>
 		<typeAlias type="kr.or.ddit.board.vo.UsersVO" alias="UsersVO"/>
 		<typeAlias type="kr.or.ddit.board.vo.CBoardVO" alias="CBoardVO"/>
+		<typeAlias type="kr.or.ddit.board.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="kr.or.ddit.board.vo.PageVO" alias="PageVO"/>
 	</typeAliases>
 
   <environments default="development">
@@ -23,5 +25,7 @@
   <mappers>
     <mapper resource="kr/or/ddit/db/mapper/Users.xml"/>
     <mapper resource="kr/or/ddit/db/mapper/CBoard.xml"/>
+    <mapper resource="kr/or/ddit/db/mapper/Board.xml"/>
   </mappers>
+  
 </configuration>

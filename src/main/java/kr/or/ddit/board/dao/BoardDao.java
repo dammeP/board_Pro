@@ -1,11 +1,13 @@
 package kr.or.ddit.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.CBoardVO;
+import kr.or.ddit.board.vo.PageVO;
 import kr.or.ddit.board.vo.UsersVO;
 import kr.or.ddit.db.MybatisUtil;
 
@@ -80,6 +82,36 @@ public class BoardDao implements BoardDaoI{
 		sqlSession.close();
 		
 		return updateCnt;
+	}
+
+	@Override
+	public List<BoardVO> selectPageBoard(PageVO pageVO) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		List<BoardVO> boardPage = sqlSession.selectList("board.selectPageBoard" , pageVO);
+		
+		sqlSession.close();
+		
+		return boardPage;
+		
+	}
+
+	@Override
+	public int selectTotalCntBoard(String cboardNo) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		int Cnt = sqlSession.selectOne("board.selectTotalCntBoard",cboardNo); 
+		return Cnt;
+		 
+	}
+
+	@Override
+	public BoardVO getBoard(String boardNo) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		BoardVO boardVO = sqlSession.selectOne("board.getBoard",boardNo);
+		sqlSession.close();
+		
+		return boardVO;
 	}
 
 

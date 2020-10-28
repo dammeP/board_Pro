@@ -55,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 		else if(usersVO.getPass().equals(pass)){
 			request.getSession().setAttribute("S_USERS", usersVO);
 			request.getSession().setAttribute("cBoardList", cBoardVO);
+			
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 		
