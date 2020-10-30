@@ -43,6 +43,6 @@
   <update id="updateBoard" parameterType="BoardVO">
   	UPDATE Board
   	  SET boardTitle = #{boardTitle}, boardContent = #{boardContent} 
-  	  WHERE boardNo = board_seq.currval
+  	  WHERE boardNo = #{boardNo}
   </update>
 </mapper>

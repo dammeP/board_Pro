@@ -20,21 +20,20 @@
 <!-- <script src="/js/jquery/jquery-1.12.4.js"></script><link href="bootstrap.css" rel="stylesheet">Bootstrap core CSS -->
 
 <script>
-// 	$(function(){
-// 		$('#boardListID tr').on('click',function(){
-// 			var boardNo = $(this).data('boardNo');
-
-// 			document.location="BoardDetail?boardNo=" + boardNo;
-// 		})
-// 	})
-
+$('#profileDownBtn').on('click',function(){
+	document.location="/profileDownload?realFileNm=${${fileList.realFileNm}";
+})
 
 
 </script>
 <style>
-td {
-	width: 100px;
-}
+#boardTitle{ font-size: 2.0em;}
+.left-box{ color: #8B4513;}
+#boardContent{ font-size: 1.2em;}
+#hrLine{border: 3px solid #3C3C8C;}
+#textS{width:700px; height:100px;  }
+#reNm{width : 50px; height:50px; font-weight:bold;}
+#reCo{width : 500px; height:100px; }
 </style>
 
 </head>
@@ -53,56 +52,93 @@ td {
 				<br>
 				<br>
 				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
-						<label id="boardTitle" data-userid="${boardVO.boardTitle}"
-							class="control=label">${boardVO.boardTitle}</label>
+						<label id="boardTitle" data-userid="${boardVO.boardTitle}"class="control=label">${boardVO.boardTitle}</label>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="left-box">
+						<label id="userId" class="control=label">작성자 : </label>
+						<label id="userId" class="control=label">${boardVO.userId}</label>
+						<label id="userId" class="control=label">작성일자 : </label>
+						<label id="boardDate" class="control=label">${boardVO.boardDate}</label>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="form-group">
+					<div class="col-sm-10">
+						<label id="boardContent"class="control=label">${boardVO.boardContent}</label>
 					</div>
 				</div>
 				<br>
 				<br>
 				<br>
 				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">내용</label>
-					<div class="col-sm-10">
-						<label id="boardContent" class="control=label">${boardVO.boardContent}</label>
-					</div>
-				</div>
-				<br>
-				<br>
-				<br>
-				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">첨부파일</label>
-							<c:forEach items="${filesList }" var = "fileList">
+					<label id="userid" for="userid" class="col-sm-10 control-label">첨부파일</label>
+							<c:forEach items="${filesList }" var="fileList">
+							<img src="${cp}/profileImg?realFileNM=${fileList.realFileNm}"/><br>
 								<label id="file" class="control=label">${fileList.realFileNm }</label><br>
+								<button id="profileDownBtn" data-realFileNm="${fileList.realFileNm }" type="button" class="btn btn-default"  >다운로드 : ${fileList.realFileNm }</button>
 							</c:forEach>	
 				</div>
 				<div>
-					<div class="col-sm-offset-2 col-sm-10">
-						<button name="upBtn">
-							<a href="${cp }/BoardUpdate?boardNo=${boardVO.boardNo}">수정</a>
+					<div class="col-sm-offset-6 col-sm-10">
+					<form action="${cp }/BoardUpdate?boardNo=${boardVO.boardNo}" method="GET" enctype="multipart/form-data">
+						<input type="hidden" name="boardNo" value="${boardVO.boardNo}">
+						<button name="upBtn" type="submit" class="btn btn-default">수정
 						</button>
+					</form>
 						<form action="${cp }/BoardDelete" method="POST">
 							<% String boardNo = request.getParameter("boardNo"); 
 							%>							
-							<input type="hidden" name="cboardNo" value="${boardVO.CBoardNo}" }>
-							<input type="hidden" name="boardNo" value="${boardNo}" }>
-							<input type="submit" value="삭제">
+							<input type="hidden" name="cboardNo" value="${boardVO.CBoardNo}" >
+							<input type="hidden" name="boardNo" value="${boardVO.boardNo}" >
+							<button name="delBtn" type="submit" class="btn btn-default">
+								삭제
+							</button>
 						</form>
-						<button name="ureBtnpBtn">
+						<button name="ureBtnpBtn" type="button" class="btn btn-default">
 							<a href="">답글</a>
 						</button>
 					</div>
 				</div>
 
 				<br><br><br>
+
+
+
+
 				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">댓글</label>
-						<div class="col-sm-10">
-							<textarea name="boardTitle"></textarea>
-						</div>
+					<div id="replyS" class="col-sm-10">
+					<label>댓글 조회</label>
+					<form action="${cp }/ReplyDelete" method="POST">
+						<table>
+							<c:forEach items="${replyList}" var="replyList">
+								<c:if test="${replyList.replyDelCheck != '1'}" >
+								<tr>
+									<td id="ReNm">${replyList.userId }</td>
+								</tr>
+								<tr>
+									<td id="ReCo">${replyList.replyContent }</td>
+									<input type="hidden" name="boardNo" value="${boardVO.boardNo}" >
+									<input type="hidden" name="replyNo" value="${replyList.replyNo }">
+									<td><button>삭제</button></td>
+								</tr>
+								</c:if>
+							</c:forEach>
+					</form>
+							
+						</table>
+						<form action="${cp }/ReplyInsert" method="POST">
+							<textarea id="textS" name="replyC"></textarea>
+							<input type="hidden" name="boardNo" value="${boardVO.boardNo}">
+							<input type="hidden" name="userId" value="${boardVO.userId }">
+							<button name="addBtnR" type="submit">등록</button>
+						</form>
+					</div>
 				</div>
-				<br><br><br>
 			</div>
 		</div>
 	</div>

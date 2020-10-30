@@ -4,6 +4,7 @@ public class FilesVO {
 	private String fileNm;
 	private String realFileNm;
 	private String boardNo;
+	private String fileNo;
 	
 	public String getFileNm() {
 		return fileNm;
@@ -23,12 +24,19 @@ public class FilesVO {
 	public void setBoardNo(String boardNo) {
 		this.boardNo = boardNo;
 	}
+	public String getFileNo() {
+		return fileNo;
+	}
+	public void setFileNo(String fileNo) {
+		this.fileNo = fileNo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((boardNo == null) ? 0 : boardNo.hashCode());
 		result = prime * result + ((fileNm == null) ? 0 : fileNm.hashCode());
+		result = prime * result + ((fileNo == null) ? 0 : fileNo.hashCode());
 		result = prime * result + ((realFileNm == null) ? 0 : realFileNm.hashCode());
 		return result;
 	}
@@ -51,6 +59,11 @@ public class FilesVO {
 				return false;
 		} else if (!fileNm.equals(other.fileNm))
 			return false;
+		if (fileNo == null) {
+			if (other.fileNo != null)
+				return false;
+		} else if (!fileNo.equals(other.fileNo))
+			return false;
 		if (realFileNm == null) {
 			if (other.realFileNm != null)
 				return false;
@@ -60,10 +73,11 @@ public class FilesVO {
 	}
 	@Override
 	public String toString() {
-		return "FilesVO [fileNm=" + fileNm + ", realFileNm=" + realFileNm + ", boardNo=" + boardNo + "]";
+		return "FilesVO [fileNm=" + fileNm + ", realFileNm=" + realFileNm + ", boardNo=" + boardNo + ", fileNo="
+				+ fileNo + "]";
 	}
 	
-	
+
 	
 	
 }

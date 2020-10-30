@@ -1,4 +1,4 @@
-package kr.or.ddit.board.vo;
+package kr.or.ddit.reply.vo;
 
 import java.sql.Date;
 
@@ -8,6 +8,7 @@ public class ReplyVO {
 	private Date replyDate;
 	private String replyDelCheck;
 	private String userId;
+	private String boardNo;
 	
 	public String getReplyNo() {
 		return replyNo;
@@ -39,17 +40,17 @@ public class ReplyVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	@Override
-	public String toString() {
-		return "ReplyVO [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate
-				+ ", replyDelCheck=" + replyDelCheck + ", userId=" + userId + "]";
+	public String getBoardNo() {
+		return boardNo;
 	}
-	
+	public void setBoardNo(String boardNo) {
+		this.boardNo = boardNo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((boardNo == null) ? 0 : boardNo.hashCode());
 		result = prime * result + ((replyContent == null) ? 0 : replyContent.hashCode());
 		result = prime * result + ((replyDate == null) ? 0 : replyDate.hashCode());
 		result = prime * result + ((replyDelCheck == null) ? 0 : replyDelCheck.hashCode());
@@ -57,7 +58,6 @@ public class ReplyVO {
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,6 +67,11 @@ public class ReplyVO {
 		if (getClass() != obj.getClass())
 			return false;
 		ReplyVO other = (ReplyVO) obj;
+		if (boardNo == null) {
+			if (other.boardNo != null)
+				return false;
+		} else if (!boardNo.equals(other.boardNo))
+			return false;
 		if (replyContent == null) {
 			if (other.replyContent != null)
 				return false;
@@ -94,6 +99,12 @@ public class ReplyVO {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "ReplyVO [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate
+				+ ", replyDelCheck=" + replyDelCheck + ", userId=" + userId + ", boardNo=" + boardNo + "]";
+	}
+	
 	
 	
 	

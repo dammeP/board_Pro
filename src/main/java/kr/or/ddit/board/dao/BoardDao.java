@@ -1,5 +1,6 @@
 package kr.or.ddit.board.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -104,6 +105,7 @@ public class BoardDao implements BoardDaoI{
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		
 		int Cnt = sqlSession.selectOne("board.selectTotalCntBoard",cboardNo); 
+		sqlSession.close();
 		return Cnt;
 		 
 	}
@@ -176,6 +178,7 @@ public class BoardDao implements BoardDaoI{
 		else {
 			sqlSession.rollback();
 		}
+		sqlSession.close();
 		return deleteCnt;
 	}
 
@@ -205,25 +208,30 @@ public class BoardDao implements BoardDaoI{
 		else {
 			sqlSession.rollback();
 		}
+		sqlSession.close();
 		return updateCnt;
 	}
 
 	@Override
-	public int updateFiles(FilesVO filesVO) {
+	public int deleteFiles(String fileNo) {
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		int updateCnt = 0;
-		
+		logger.debug("######dao-side-fileNo : {}", fileNo);
 		try {
-			updateCnt = sqlSession.update("files.updateFiles",filesVO);
+			updateCnt = sqlSession.delete("files.deleteFiles",fileNo);
+
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
+		logger.debug("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ:{}",updateCnt);
 		if(updateCnt == 1) {
 			sqlSession.commit();
 		}
 		else {
 			sqlSession.rollback();
 		}
+		sqlSession.close();
 		return updateCnt;
 	}
 	

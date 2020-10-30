@@ -100,8 +100,8 @@ public class BoardService implements BoardServiceI{
 	}
 
 	@Override
-	public int updateFiles(FilesVO filesVO) {
-		return boardDao.updateFiles(filesVO);
+	public int deleteFiles(String fileNo) {
+		return boardDao.deleteFiles(fileNo);
 	}
 
 	

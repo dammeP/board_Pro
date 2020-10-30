@@ -33,21 +33,32 @@
   		  maxHeight: null,             // 최대 높이
   		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
   		  lang: "ko-KR",					// 한글 설정
-//   		  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+  		  placeholder: '수정할 글을 작성해주세요'	//placeholder 설정
             
   		});
-// 		$('#regBtn').on('click',function(){
-// 			$('#frm').submit();
-// 		})
+
+  		$('#upBtn').on('click',function(){
+			alert('수정되었습니다');
+
+    	})
+
+    	$('button[id^=delFBtn]').on('click',function(){
+			var fileNo = $(this).attr('value');
+			alert(fileNo);
+			$(this).remove();
+
+			fileNoDynamic = "<div><input type='hidden' value='"+fileNo+"' name='fileNoUp'></div>"
+			$('#DelFileListId').append(fileNoDynamic);
+			
+			
+        })
   		
-	});
+	})
 
 </script>
 </head>
 <style>
-td {
-	width: 100px;
-}
+/* #fileA{width: 500px;} */
 </style>
 
 
@@ -61,42 +72,60 @@ td {
 				<%@ include file="/cBoard/cboardList.jsp"%>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<br>
-				<br>
-				<br>
-				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">제목</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목" value="${boardVO.boardTitle}"/>	
+				<form id="frm" class="form-horizontal" role="form" action="${cp}/BoardUpdate?boardNo=${boardVO.boardNo}" method="POST" enctype="multipart/form-data">
+					<br>
+					<br>
+					<br>
+					<div class="form-group">
+						<label id="userid" for="userid" class="col-sm-2 control-label">제목</label>
+						<div class="col-sm-10">
+<!-- 							<label  class="form-control" >제목</label>	 -->
+							<input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목" value="${boardVO.boardTitle}"/>	
+						
+						</div>
 					</div>
-				</div>
-				<br>
-				<br>
-				<br>
-				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">내용</label>
-					<div class="col-sm-10">
-					 <textarea id="summernote" name="boardContent"  placeholder="내용" value="${boardVO.boardContent}"></textarea>
+					<br>
+					<br>
+					<br>
+					<div class="form-group">
+						<label id="userid" for="userid" class="col-sm-2 control-label">내용</label>
+						<div class="col-sm-10">
+						 <textarea id="summernote" name="boardContent" value="${boardVO.boardContent}"></textarea>
+						</div>
 					</div>
-				</div>
-				<br>
-				<br>
-				<br>
-				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-2 control-label">첨부파일</label>
-							<div>
-								<c:forEach items="${filesList }" var = "fileList">
-									<input type="text" class="form-control" id="fileNm" name="fileNm" placeholder="첨부파일" value="${fileList.realFileNm }"/><br>
-								</c:forEach>	
-							</div>
-							<input type="file" name="fileName" />
-				</div>
-
-				<br><br><br>
-				<div class="form-group">
-					<input type="submit" value="수정하기">
-				</div>
-				<br><br><br>
+					<br>
+					<br>
+					<br>
+					<div class="form-group">
+						<label id="files" for="files" >첨부파일<br>
+										<c:forEach items="${filesList }" var="filesList" varStatus="status">
+											<button id="delFBtn${status.count}" type="button" name="fileNo"  value="${filesList.fileNo}">${filesList.realFileNm } X</button>
+<%-- 											<button id="delFBtn${status.count}" type="button" name="fileNm"  value="${filesList.fileNm}">${filesList.realFileNm } X</button> --%>
+											<br>
+										</c:forEach>	
+										<div id="DelFileListId">
+										</div>
+						</label>
+							
+								<c:forEach var="i" begin="1" end="${5-filesList.size() }">
+							
+									<div class="form-group">
+										<label for="userid" class="col-sm-2 control-label">첨부파일</label>
+										<div class="col-sm-10">
+											  <input type="file" name="fileName${i }"/>
+										</div>
+									</div>
+								</c:forEach>
+							
+					</div>
+	
+					<br><br><br>
+					<div>
+<!-- 						<input id="upBtn"type="submit" value="수정하기"> -->
+						<button id="upBtn"type="submit" >수정하기</button>
+					</div>
+					<br><br><br>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -6,8 +6,8 @@
   
   <insert id="insertFiles" parameterType="FilesVO">
   	INSERT INTO files
-  	(fileNm, realFileNm, boardNo)
-  	VALUES (#{fileNm}, #{realFileNm},#{boardNo})
+  	(fileNm, realFileNm, boardNo,fileNo)
+  	VALUES (#{fileNm}, #{realFileNm},#{boardNo},file_seq.nextVal)
   
   </insert>
   
@@ -17,10 +17,9 @@
   	 WHERE boardNo = #{boardNo} 
   </select>
   
-  <update id="updateFiles" parameterType="FilesVO">
-  	UPDATE files
-  	  SET fileNm = #{fileNm} , realFileNm = #{realFileNm}
-  	 WHERE boardNo = board_seq.currval
-  </update>
+  <delete id="deleteFiles" parameterType="String">
+  	DELETE FROM files 
+  	WHERE fileNo = #{fileNo}
+  </delete>
   
 </mapper>

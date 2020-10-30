@@ -16,6 +16,9 @@ import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.board.vo.BoardVO;
 import kr.or.ddit.board.vo.FilesVO;
+import kr.or.ddit.reply.service.ReplyService;
+import kr.or.ddit.reply.service.ReplyServiceI;
+import kr.or.ddit.reply.vo.ReplyVO;
 
 /**
  * Servlet implementation class BoardDetailServlet
@@ -26,10 +29,12 @@ public class BoardDetailServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory.getLogger(BoardDetailServlet.class);
 	
 	BoardServiceI boardService;
+	ReplyServiceI replyService;
 	
 	@Override
 		public void init() throws ServletException {
 			boardService = new BoardService();
+			replyService = new ReplyService();
 		}
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,11 +42,13 @@ public class BoardDetailServlet extends HttpServlet {
 		logger.debug("boNO:{}",boardNo);
 		
 		BoardVO boardVO = boardService.getBoard(boardNo);
-		request.setAttribute("boardNo", boardNo);
 		request.setAttribute("boardVO", boardVO);
 		
+		List<ReplyVO> replyList = replyService.selectAllReply(boardNo);
 		List<FilesVO> filesList = boardService.selectAllFiles(boardNo);
  		
+		logger.debug("replyList:{}",replyList);
+		request.setAttribute("replyList", replyList);
 		request.setAttribute("filesList", filesList); 
 		
 		request.getRequestDispatcher("/board/boardDetail.jsp").forward(request, response);

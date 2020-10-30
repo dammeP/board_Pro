@@ -9,5 +9,6 @@
     WHERE userId = #{userId}
   </select>
   
+ 
   
 </mapper>

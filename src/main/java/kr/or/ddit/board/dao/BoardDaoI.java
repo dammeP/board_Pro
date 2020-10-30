@@ -38,6 +38,6 @@ public interface BoardDaoI {
 	
 	int updateBoard(BoardVO boardVO);	// 게시글 수정
 	
-	int updateFiles(FilesVO filesVO);	// 첨부파일 수정
+	int deleteFiles(String fileNo);	// 첨부파일 삭제
 	
 }
