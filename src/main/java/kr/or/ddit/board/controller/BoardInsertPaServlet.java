@@ -1,9 +1,6 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +15,15 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.board.vo.BoardVO;
-import kr.or.ddit.board.vo.CBoardVO;
 import kr.or.ddit.board.vo.FilesVO;
 import kr.or.ddit.fileUpload.FileUploadUtil;
 
 /**
- * Servlet implementation class BoardRegist
+ * Servlet implementation class BoardInsertPaServlet
  */
-@WebServlet("/BoardRegist")
+@WebServlet("/BoardInsertPa")
 @MultipartConfig
-public class BoardRegistServlet extends HttpServlet {
+public class BoardInsertPaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(BoardRegistServlet.class);
 	
@@ -42,28 +38,38 @@ public class BoardRegistServlet extends HttpServlet {
 	}
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cboardNo = request.getParameter("cboardNoPa");
+		String boardNo = request.getParameter("boardNoPa");
+		String userId = request.getParameter("userIdPa");
 		
-		request.getRequestDispatcher("/board/boardRegist.jsp").forward(request, response);
+		request.setAttribute("cboardNo", cboardNo);
+		request.setAttribute("boardNo", boardNo);
+		request.setAttribute("userId", userId);
+		
+		request.getRequestDispatcher("/board/boardInsertPa.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		request.setCharacterEncoding("utf-8");
 		String cboardNo = request.getParameter("cboardNo");
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
 		String userId = request.getParameter("userId");
+		String paBoardNo = request.getParameter("boardNo");
 		
-		logger.debug("게시글 등록:글제목, 글 내용, cboardNo , 아이디:{},{},{},{}",boardTitle, boardContent,cboardNo,userId);
+		logger.debug("PA게시글등록 : 글제목, 글 내용, cboardNo , 아이디,boNo:{},{},{},{},{}",boardTitle, boardContent,cboardNo,userId,paBoardNo);
 		
 		BoardVO boardVO = new BoardVO();
 		boardVO.setUserId(userId);
 		boardVO.setBoardTitle(boardTitle);
 		boardVO.setBoardContent(boardContent);
 		boardVO.setCBoardNo(cboardNo);
+		boardVO.setPaBoardNo(paBoardNo);
 		
 		
 		
-		insertCnt = boardService.insertBoard(boardVO);
+		insertCnt = boardService.insertBoardPa(boardVO);
 		for (int i = 1; i < 6; i++) {
 			Part profile = request.getPart("fileName" + i);
 			logger.debug("file : {}", profile.getHeader("Content-Disposition"));
@@ -74,8 +80,8 @@ public class BoardRegistServlet extends HttpServlet {
 
 			if (profile.getSize() > 0) {
 				String extension = FileUploadUtil.getExtenstion(realFilename);
-				filePath = "D:\\profile\\" + realFilename ;
-				realFileNm = realFilename;
+				filePath = "D:\\profile\\" + realFilename + "." + extension;
+				realFileNm = realFilename + "." + extension;
 				profile.write(filePath);
 
 				if (realFileNm != null) {
@@ -110,8 +116,6 @@ public class BoardRegistServlet extends HttpServlet {
 			doGet(request, response);
 		}
 		
-		
-	
 	}
 
 }

@@ -10,6 +10,7 @@ public class BoardVO {
 	private String CBoardNo;
 	private String userId;
 	private String boardUseCheck;
+	private String paBoardNo;
 	
 	public String getBoardNo() {
 		return boardNo;
@@ -53,6 +54,12 @@ public class BoardVO {
 	public void setBoardUseCheck(String boardUseCheck) {
 		this.boardUseCheck = boardUseCheck;
 	}
+	public String getPaBoardNo() {
+		return paBoardNo;
+	}
+	public void setPaBoardNo(String paBoardNo) {
+		this.paBoardNo = paBoardNo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +70,7 @@ public class BoardVO {
 		result = prime * result + ((boardNo == null) ? 0 : boardNo.hashCode());
 		result = prime * result + ((boardTitle == null) ? 0 : boardTitle.hashCode());
 		result = prime * result + ((boardUseCheck == null) ? 0 : boardUseCheck.hashCode());
+		result = prime * result + ((paBoardNo == null) ? 0 : paBoardNo.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -105,6 +113,11 @@ public class BoardVO {
 				return false;
 		} else if (!boardUseCheck.equals(other.boardUseCheck))
 			return false;
+		if (paBoardNo == null) {
+			if (other.paBoardNo != null)
+				return false;
+		} else if (!paBoardNo.equals(other.paBoardNo))
+			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
@@ -116,7 +129,7 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", boardDate=" + boardDate + ", CBoardNo=" + CBoardNo + ", userId=" + userId + ", boardUseCheck="
-				+ boardUseCheck + "]";
+				+ boardUseCheck + ", paBoardNo=" + paBoardNo + "]";
 	}
 	
 	

@@ -216,7 +216,7 @@ public class BoardDao implements BoardDaoI{
 	public int deleteFiles(String fileNo) {
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		int updateCnt = 0;
-		logger.debug("######dao-side-fileNo : {}", fileNo);
+//		logger.debug("######dao-side-fileNo : {}", fileNo);
 		try {
 			updateCnt = sqlSession.delete("files.deleteFiles",fileNo);
 
@@ -224,7 +224,6 @@ public class BoardDao implements BoardDaoI{
 			e.printStackTrace();
 		}
 		
-		logger.debug("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ:{}",updateCnt);
 		if(updateCnt == 1) {
 			sqlSession.commit();
 		}
@@ -233,6 +232,37 @@ public class BoardDao implements BoardDaoI{
 		}
 		sqlSession.close();
 		return updateCnt;
+	}
+
+	@Override
+	public FilesVO selectImgfiles(String fileNo) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		FilesVO filesVO = sqlSession.selectOne("files.getFilesImg",fileNo);
+		sqlSession.close();
+		
+		return filesVO;
+	}
+
+	@Override
+	public int insertBoardPa(BoardVO boardVO) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int insertCnt = 0;
+		
+		try {
+			insertCnt = sqlSession.insert("board.insertBoardPa",boardVO);
+		} catch (Exception e) {
+		}
+		
+		if(insertCnt == 1) {
+			sqlSession.commit();
+		}
+		else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return insertCnt;
 	}
 	
 

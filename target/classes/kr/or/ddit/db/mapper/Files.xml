@@ -22,4 +22,9 @@
   	WHERE fileNo = #{fileNo}
   </delete>
   
+  <select id="getFilesImg" parameterType="String" resultType="FilesVO">
+  	SELECT * 
+  	  FROM files
+  	 WHERE fileNo = #{fileNo} 
+  </select>
 </mapper>

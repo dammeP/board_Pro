@@ -40,4 +40,9 @@ public interface BoardDaoI {
 	
 	int deleteFiles(String fileNo);	// 첨부파일 삭제
 	
+	FilesVO selectImgfiles(String fileNo);	// Files 사진 조회
+	
+	int insertBoardPa(BoardVO boardVO); 	// 답글 생성
+	
+	
 }

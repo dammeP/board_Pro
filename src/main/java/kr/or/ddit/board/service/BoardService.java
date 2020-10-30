@@ -104,6 +104,16 @@ public class BoardService implements BoardServiceI{
 		return boardDao.deleteFiles(fileNo);
 	}
 
+	@Override
+	public FilesVO selectImgfiles(String fileNo) {
+		return boardDao.selectImgfiles(fileNo);
+	}
+
+	@Override
+	public int insertBoardPa(BoardVO boardVO) {
+		return boardDao.insertBoardPa(boardVO);
+	}
+
 	
 
 

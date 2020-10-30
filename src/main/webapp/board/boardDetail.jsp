@@ -20,10 +20,6 @@
 <!-- <script src="/js/jquery/jquery-1.12.4.js"></script><link href="bootstrap.css" rel="stylesheet">Bootstrap core CSS -->
 
 <script>
-$('#profileDownBtn').on('click',function(){
-	document.location="/profileDownload?realFileNm=${${fileList.realFileNm}";
-})
-
 
 </script>
 <style>
@@ -76,12 +72,18 @@ $('#profileDownBtn').on('click',function(){
 				<br>
 				<br>
 				<div class="form-group">
-					<label id="userid" for="userid" class="col-sm-10 control-label">첨부파일</label>
-							<c:forEach items="${filesList }" var="fileList">
-							<img src="${cp}/profileImg?realFileNM=${fileList.realFileNm}"/><br>
-								<label id="file" class="control=label">${fileList.realFileNm }</label><br>
-								<button id="profileDownBtn" data-realFileNm="${fileList.realFileNm }" type="button" class="btn btn-default"  >다운로드 : ${fileList.realFileNm }</button>
-							</c:forEach>	
+					<label id="userid" for="userid" >첨부파일</label>
+					<div>
+						<form action="${cp }/profileDownload?fileNo=${fileList.fileNo}" method="GET" enctype="multipart/form-data">
+								<c:forEach items="${filesList }" var="fileList">
+								<img src="${cp}/profileImg?fileNo=${fileList.fileNo}"/><br>
+									<input type="hidden" name="fileNo" value="${fileList.fileNo}">
+									<div>
+									<button id="profileDownBtn"  type="submit" class="btn btn-default"  >다운로드 : ${fileList.realFileNm }</button>
+									</div>
+								</c:forEach>	
+						</form>
+					</div>
 				</div>
 				<div>
 					<div class="col-sm-offset-6 col-sm-10">
@@ -99,9 +101,14 @@ $('#profileDownBtn').on('click',function(){
 								삭제
 							</button>
 						</form>
-						<button name="ureBtnpBtn" type="button" class="btn btn-default">
-							<a href="">답글</a>
-						</button>
+						<form action="${cp }/BoardInsertPa?boardNo=${boardVO.boardNo}" method="GET" >
+							<input type="hidden" name="cboardNoPa" value="${boardVO.CBoardNo}" >
+							<input type="hidden" name="boardNoPa" value="${boardVO.boardNo}" >
+							<input type="hidden" name="userIdPa" value="${boardVO.userId}" >
+							<button name="ureBtnpBtn" type="submit" class="btn btn-default">
+								답글
+							</button>
+						</form>
 					</div>
 				</div>
 
@@ -131,7 +138,7 @@ $('#profileDownBtn').on('click',function(){
 					</form>
 							
 						</table>
-						<form action="${cp }/ReplyInsert" method="POST">
+						<form action="${cp }/BoardRegist" method="POST">
 							<textarea id="textS" name="replyC"></textarea>
 							<input type="hidden" name="boardNo" value="${boardVO.boardNo}">
 							<input type="hidden" name="userId" value="${boardVO.userId }">

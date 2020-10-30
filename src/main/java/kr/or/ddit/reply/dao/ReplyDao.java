@@ -22,7 +22,6 @@ public class ReplyDao implements ReplyDaoI{
 			insertCnt = sqlSession.insert("reply.insertReply",replyVO);
 		} catch (Exception e) {
 		}
-		logger.debug("CntTTTTTT:{}",insertCnt);
 		if(insertCnt == 1) {
 			sqlSession.commit();
 		}
