@@ -5,7 +5,7 @@
 <mapper namespace="board">
   <select id="selectPageBoard" parameterType="PageVO" resultType="BoardVO">
 SELECT B.*
-FROM    (SELECT ROWNUM AS rn,boardNo, LPAD('ㄴ',(level -1)*4)||boardTitle as boardTitle, userId, boardDate ,level
+FROM    (SELECT ROWNUM AS rn,boardNo, LPAD('ㄴ',(level -1)*4)||boardTitle as boardTitle, userId, boardDate ,level,boardUseCheck
     		FROM (SELECT * 
             		FROM board 
             		WHERE cboardNo = #{cboardNo})

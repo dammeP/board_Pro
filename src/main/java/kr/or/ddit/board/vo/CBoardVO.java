@@ -6,6 +6,20 @@ public class CBoardVO {
 	private String cboardNo;
 	private String userId;
 	
+	public CBoardVO() {
+
+	}
+	
+	public CBoardVO(String cboardUseCheck, String cboardCategory, String cboardNo, String userId) {
+		this.cboardUseCheck = cboardUseCheck;
+		this.cboardCategory = cboardCategory;
+		this.cboardNo = cboardNo;
+		this.userId = userId;
+	}
+
+
+
+
 	public String getCboardUseCheck() {
 		return cboardUseCheck;
 	}

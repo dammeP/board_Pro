@@ -44,7 +44,7 @@
 
     	$('button[id^=delFBtn]').on('click',function(){
 			var fileNo = $(this).attr('value');
-			alert(fileNo);
+// 			alert(fileNo);
 			$(this).remove();
 
 			fileNoDynamic = "<div><input type='hidden' value='"+fileNo+"' name='fileNoUp'></div>"

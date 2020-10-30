@@ -69,7 +69,6 @@ td {
 											<tr class="a" data-boardNo="${boardList.boardNo }">
 													<td>${boardList.boardNo }</td>
 												<c:choose>
-													
 													<c:when test="${boardList.boardUseCheck == '1'}">
 														<td>[삭제된 게시물 입니다]</td>
 													</c:when>

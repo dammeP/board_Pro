@@ -12,6 +12,25 @@ public class BoardVO {
 	private String boardUseCheck;
 	private String paBoardNo;
 	
+	public BoardVO() {
+	}
+
+	
+	
+	public BoardVO(String boardNo, String boardTitle, String boardContent, Date boardDate, String cBoardNo,
+			String userId, String boardUseCheck, String paBoardNo) {
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardDate = boardDate;
+		CBoardNo = cBoardNo;
+		this.userId = userId;
+		this.boardUseCheck = boardUseCheck;
+		this.paBoardNo = paBoardNo;
+	}
+
+
+
 	public String getBoardNo() {
 		return boardNo;
 	}

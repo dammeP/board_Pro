@@ -29,10 +29,6 @@ public class ReplyDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String boardNo = request.getParameter("boardNo");
-		request.getRequestDispatcher("/board/boardDetail.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String boardNo = request.getParameter("boardNo");
 		String replyNo = request.getParameter("replyNo");
 		
@@ -43,8 +39,12 @@ public class ReplyDeleteServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() +"/BoardDetail?boardNo="+boardNo);
 		}
 		else {
-			doGet(request, response);
+//			doGet(request, response);
+			request.getRequestDispatcher("/board/boardDetail.jsp").forward(request, response);
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

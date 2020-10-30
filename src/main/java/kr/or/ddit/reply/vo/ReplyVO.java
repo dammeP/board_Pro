@@ -10,6 +10,24 @@ public class ReplyVO {
 	private String userId;
 	private String boardNo;
 	
+
+	public ReplyVO() {
+	}
+
+	
+	
+	public ReplyVO(String replyNo, String replyContent, Date replyDate, String replyDelCheck, String userId,
+			String boardNo) {
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyDate = replyDate;
+		this.replyDelCheck = replyDelCheck;
+		this.userId = userId;
+		this.boardNo = boardNo;
+	}
+
+
+
 	public String getReplyNo() {
 		return replyNo;
 	}

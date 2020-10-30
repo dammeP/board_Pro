@@ -21,6 +21,16 @@
 
 <script>
 
+$(function(){
+	$('.delB').on('click',function(){
+		var Pa = $(this).parents('.delDiv').find('.replyNo').attr('value');
+		var boNo = $('.BONO').attr('value');
+		
+// 		alert(Pa);
+		document.location="${cp}/ReplyDelete?boardNo="+boNo+"&replyNo="+Pa;
+	})
+	
+})
 </script>
 <style>
 #boardTitle{ font-size: 2.0em;}
@@ -101,7 +111,7 @@
 								삭제
 							</button>
 						</form>
-						<form action="${cp }/BoardInsertPa?boardNo=${boardVO.boardNo}" method="GET" >
+						<form action="${cp }/BoardInsertPa?boardNo=${boardVO.boardNo}" method="GET" enctype="multipart/form-data" >
 							<input type="hidden" name="cboardNoPa" value="${boardVO.CBoardNo}" >
 							<input type="hidden" name="boardNoPa" value="${boardVO.boardNo}" >
 							<input type="hidden" name="userIdPa" value="${boardVO.userId}" >
@@ -119,31 +129,35 @@
 
 				<div class="form-group">
 					<div id="replyS" class="col-sm-10">
-					<label>댓글 조회</label>
-					<form action="${cp }/ReplyDelete" method="POST">
-						<table>
-							<c:forEach items="${replyList}" var="replyList">
-								<c:if test="${replyList.replyDelCheck != '1'}" >
-								<tr>
-									<td id="ReNm">${replyList.userId }</td>
-								</tr>
-								<tr>
-									<td id="ReCo">${replyList.replyContent }</td>
-									<input type="hidden" name="boardNo" value="${boardVO.boardNo}" >
-									<input type="hidden" name="replyNo" value="${replyList.replyNo }">
-									<td><button>삭제</button></td>
-								</tr>
-								</c:if>
-							</c:forEach>
-					</form>
-							
-						</table>
-						<form action="${cp }/BoardRegist" method="POST">
-							<textarea id="textS" name="replyC"></textarea>
-							<input type="hidden" name="boardNo" value="${boardVO.boardNo}">
-							<input type="hidden" name="userId" value="${boardVO.userId }">
-							<button name="addBtnR" type="submit">등록</button>
-						</form>
+						<label>댓글 조회</label>
+						<div>
+							<form action="${cp }/ReplyDelete" method="POST" >
+									<c:forEach items="${replyList}" var="replyList">
+											<label id="ReNm">${replyList.userId }</label>
+											<label id="ReDt">${replyList.replyDate }</label>
+											<c:if test="${replyList.replyDelCheck == '1'}">
+															<label>삭제된 댓글 입니다.</label><br>
+											</c:if>
+											<c:if test="${replyList.replyDelCheck != '1'}">
+											<div class="delDiv">
+<!-- 													<td id="ReCo"> -->
+													<label>${replyList.replyContent }</label>
+													<input type="hidden" class="BONO"name="boardNo" value="${boardVO.boardNo}" >
+													<input type="hidden" class="replyNo" name="replyNo" value="${replyList.replyNo }">
+													<button type="button" class="delB">삭제</button>
+											</div>
+											</c:if>
+									</c:forEach>
+							</form>
+						</div>
+						<div>
+							<form action="${cp }/ReplyInsert" method="POST" >
+								<textarea id="textS" name="replyC"></textarea>
+								<input type="hidden" name="boardNo" value="${boardVO.boardNo}">
+								<input type="hidden" name="userId" value="${boardVO.userId }">
+								<button name="addBtnR" type="submit">등록</button>
+							</form>
+						</div>		
 					</div>
 				</div>
 			</div>

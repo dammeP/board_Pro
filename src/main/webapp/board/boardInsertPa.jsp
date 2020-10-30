@@ -57,7 +57,7 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">게시글 등록</h2>
+						<h2 class="sub-header">답글 등록</h2>
 						<form id="frm" class="form-horizontal" role="form" action="${cp}/BoardInsertPa" method="POST" enctype="multipart/form-data">
 							
 							<input type="hidden" id="userId" name="userId" value="${userId}">

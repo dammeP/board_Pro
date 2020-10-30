@@ -58,6 +58,7 @@ public class BoardListServlet extends HttpServlet {
 		request.setAttribute("boardList", map.get("boardList"));
 		request.setAttribute("pages", map.get("pages"));
 		
+		
 		logger.debug("boardList:{}",map.get("boardList"));
 		logger.debug("pages:{}",map.get("pages"));
 		

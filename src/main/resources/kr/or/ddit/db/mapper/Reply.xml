@@ -14,6 +14,7 @@
   	SELECT * 
   	  FROM Reply
   	 WHERE boardNo = #{boardNo} 
+  	 ORDER BY replyDate DESC
   </select>
   
    <update id="updateReply" parameterType="String">
