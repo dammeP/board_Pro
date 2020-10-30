@@ -23,7 +23,7 @@ public class BoardVO {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardDate = boardDate;
-		CBoardNo = cBoardNo;
+		this.CBoardNo = cBoardNo;
 		this.userId = userId;
 		this.boardUseCheck = boardUseCheck;
 		this.paBoardNo = paBoardNo;

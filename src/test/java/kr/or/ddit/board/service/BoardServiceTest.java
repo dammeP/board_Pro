@@ -20,10 +20,11 @@ public class BoardServiceTest {
 	BoardServiceI boardService;
 	
 	@Before
-	private void setup() {
+	public void setup() {
 		boardService = new BoardService();
 	}
 	
+	@Test
 	public void getUsersTest() {
 		/***Given***/
 		String userId = "brown";
@@ -180,7 +181,7 @@ public class BoardServiceTest {
 	}
 	
 	@Test
-	private void deleteFilesTest() {
+	public void deleteFilesTest() {
 		/***Given***/
 		String fileNo = "1";
 

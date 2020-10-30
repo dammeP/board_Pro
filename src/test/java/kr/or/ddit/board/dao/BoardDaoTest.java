@@ -19,10 +19,11 @@ public class BoardDaoTest {
 	BoardDaoI boardDao;
 	
 	@Before
-	private void setup() {
+	public void setup() {
 		boardDao = new BoardDao();
 	}
 	
+	@Test
 	public void getUsersTest() {
 		/***Given***/
 		String userId = "brown";
@@ -39,6 +40,7 @@ public class BoardDaoTest {
 		assertEquals("brownPass", usersVO.getPass());
 	}
 	
+	@Test
 	public void selectAllCBoardTest() {
 		/***Given***/
 		
@@ -168,7 +170,7 @@ public class BoardDaoTest {
 	}
 	
 	@Test
-	private void deleteFilesTest() {
+	public void deleteFilesTest() {
 		/***Given***/
 		String fileNo = "1";
 
