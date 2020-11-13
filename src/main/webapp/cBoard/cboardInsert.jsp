@@ -63,8 +63,7 @@ td {
 								<c:forEach items="${cBoardList }" var="cBoardList">
 									<form id="frm" action="${cp }/CBoardUpdate" method="POST">
 									<tr>
-										<input type="hidden" id="userId" name="userId"
-											value=${S_USERS.userId }>
+										<input type="hidden" id="userId" name="userId" value=${S_USERS.userId }/>
 										<td>게시판이름</td>
 										<td><input type="text" id="cboardCategory"
 											name="cboardCategory" value="${cBoardList.cboardCategory }"></td>
@@ -80,7 +79,6 @@ td {
 										</select></td>
 										<td><input name="Btn" type="submit" value="수정"></td>
 									</tr>
-
 									</form>
 								</c:forEach>
 							</table>

@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.board.vo.CBoardVO;
-import kr.or.ddit.board.vo.UsersVO;
 
 /**
  * Servlet implementation class CBoardCreateServlet

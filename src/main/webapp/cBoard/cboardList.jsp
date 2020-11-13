@@ -3,15 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script>
-// 	$(function(){
-// 		$('#category').on('click',function(){
-// 			var cboardNo = $(this).data('cboardNo');
-// 			console.log('cboardNo : ' + cboardNo);
-
-// 			document.location="/boardList?cboardNo=" + cboardNo;
-// 		})
-		
-// 	})
 </script>
 
 <ul class="nav nav-sidebar">

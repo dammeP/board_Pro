@@ -19,18 +19,6 @@
 <!-- <script src="/js/jquery/jquery-1.12.4.js"></script><link href="bootstrap.css" rel="stylesheet">Bootstrap core CSS -->
 
 <script>
-// 	$(function(){
-// 		$('.a').on('click',function(){
-// 			var boardNo = "2";
-// 			alert(boardNo);
-// 			boardNo = $(this).data('boardNo');
-// 			alert(boardNo);
-
-// 			$(location).attr('href',"boardDetail?boardNo="+boardNo);
-// // 			document.location="boardDetail?boardNo="+boardNo;
-// 		})
-// 	})
-
 
 
 </script>

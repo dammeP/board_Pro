@@ -33,7 +33,7 @@
   		  maxHeight: null,             // 최대 높이
   		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
   		  lang: "ko-KR",					// 한글 설정
-  		  placeholder: '수정할 글을 작성해주세요'	//placeholder 설정
+  		
             
   		});
 
@@ -90,7 +90,7 @@
 					<div class="form-group">
 						<label id="userid" for="userid" class="col-sm-2 control-label">내용</label>
 						<div class="col-sm-10">
-						 <textarea id="summernote" name="boardContent" value="${boardVO.boardContent}"></textarea>
+						 <textarea id="summernote" name="boardContent" placeholder="내용" value="${boardVO.boardContent}">${boardVO.boardContent}</textarea>
 						</div>
 					</div>
 					<br>
