@@ -35,6 +35,8 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 		
 	}
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
